@@ -1,0 +1,152 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<!--Start Courses Area Section-->
+<section class="popular_courses" id="popular_courses_page" ng-app="CourseApp">
+    <div class="container" ng-controller="CourseController" ng-init="CourseList()">
+        <div class="row" >
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="e in record">
+                <div class="single-courses">
+                    <div class="courses_banner_wrapper">
+                        <div class="courses_banner"><a href="#"><img src="~/Content/images/courses/courses_1.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="purchase_price">
+                            <a href="#" class="read_more-btn">$150</a>
+                        </div>
+                    </div>
+                    <div class="courses_info_wrapper">
+                        <div class="courses_title">
+                            <h3><a href="#">{{e.CourseName}}</a></h3>
+                            <div class="teachers_name">Teachers:  <a href="#" title="">{{e.NumberOfTeachers}}</a></div>
+                        </div>
+                        <div class="courses_info">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-user"></i>{{e.NumberOfStudents}} Students</li>
+                            </ul>
+                            <a href="#" class="cart_btn">View Course Grade</a>
+                        </div>
+                    </div>
+                </div><!-- Ends: .single courses -->
+            </div><!-- Ends: . -->
+
+
+
+                <div class="pagination_blog">
+                <ul>
+                    <li><a href="#">1</a></li>
+                    <li class="current"><a href="#">2</a></li>
+                    <li><a href="#" class=""><i class='flaticon-right-arrow'></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section><!-- ./ End Courses Area section -->
+
+
+<!--<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Course List</title>
+
+    <style>
+
+        .tableData {
+            border-left: solid 1px #D8C3C3;
+            border-top: solid 1px #D8C3C3;
+        }
+
+
+
+            .tableData tr {
+            }
+
+
+
+            .tableData td, .tableData th {
+                border-right: solid 1px #D8C3C3;
+                border-bottom: solid 1px #D8C3C3;
+                text-align: left;
+                padding: 5px;
+            }
+
+
+
+            .tableData td {
+            }
+
+
+
+            .tableData th {
+                background-color: #FAFAFA;
+                padding: 7px 5px;
+                border-bottom-color: #9C9C9C;
+            }
+
+
+
+        .odd {
+            background-color: #f3f3f3;
+        }
+
+
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
+
+
+
+</head>
+
+<body ng-app="CourseApp">
+
+    <div ng-controller="CourseController" ng-init="CourseList()">
+
+        <table class="tableData">
+
+            <tr>
+
+                <th>Course Name</th>
+
+                <th>Date Created</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+            <tr ng-repeat="e in record" ng-class-even="'even'" ng-class-odd="'odd'">
+
+                <td>{{e.CourseName}}</td>
+
+                <td>{{e.DateCreated}}</td>-->
+
+                @*<td><a href="/Home/update_data?id={{e.Sr_no}}">Update</a></td>
+
+                    <td><a ng-click="deleterecord(e.Sr_no)">Delete</a></td>*@
+
+            <!--</tr>
+
+        </table>
+
+    </div>
+
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/AngularCode/Controller/CourseController.js"></script>
+
+</body>
+
+</html>-->

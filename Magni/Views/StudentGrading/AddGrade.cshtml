@@ -1,0 +1,233 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section class="become_a_instructor">
+    <div class="container" ng-app="StudentGradingApp" ng-controller="StudentGradingController" ng-init="GradeList()">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="apply_instructor">
+                    <div class="form_title">
+                        <h3>AddGrade</h3>
+                    </div>
+                    <form action="#">
+                        <div class="row">
+
+                            <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label class="control-label">Students</label>
+
+                                    <select ng-model="studentGrading.StudentId" ng-disabled="!studentGrading"
+                                            class="input-sm form-control" ng-change="GetStudentCourse();GetStudentSubject();ShowHide();">
+                                        @foreach (Magni.Core.Dto.StudentListDto item in @ViewBag.Students)
+                                        {
+                                            <option value="@item.Id" class="form-control" id="inputEmail" placeholder="Student Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label class="control-label">Course Name</label>
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Unit" value="{{courseName}}">
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label class="control-label">Subjects</label>
+
+                                    <table class="table table-striped table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th>Subject Name</th>
+                                                <th>Unit</th>
+                                                <th>Grade</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr ng-repeat="r in record">
+                                                <td>{{r.SubjectName}}</td>
+                                                <td>{{r.Unit}}</td>
+                                                <td>
+                                                    @*<select class="input-sm form-control" ng-click="getGrade()" ng-disabled="editable"  >
+            @foreach (Magni.Core.Dto.GradeDto item in @ViewBag.Grades)
+            {
+                <option value="@item.Point"  ng-model="grade.Name" class="form-control" id="inputEmail" placeholder="Course"  {{editable}}>@item.Name</option>
+            }
+        </select>*@
+
+                                                    @*<select class="input-sm form-control" ng-model="selectedValue" ng-init="GradeList()" >
+           <option ng-selected="{{grade.Name}}" ng-repeat="grade in gradeList" value="{{grade.Point}}" ng-disabled="editable">{{grade.Name}}</option>
+        </select>*@
+
+
+                                                    <select class="input-sm form-control" ng-model="grade.Name" ng-change="getGrade()">
+                                                        <option  ng-repeat="grade in gradeList" value="{{grade.Point}}" ng-disabled="editable">{{grade.Name}}</option>
+                                                    </select>
+
+                                                    @*<select ng-init="GradeList()" class="input-sm form-control" ng-selected="true" ng-options="grade.Name for grade in gradeList| filter:{type:typeng.type}"
+                ng-change="getGrade()" ng-disabled="editable">
+        </select>*@
+                                                </td>
+                                                <td>
+                                                    {{grade.Name}}
+                                                </td>
+                                            </tr>
+
+                                            
+                                            
+                                        </tbody>
+
+                                    </table>
+                                    <div ng-show="IsVisible">
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Total Subjects</th>
+                                                    <th>Total Credit</th>
+                                                    <th>Calculated GPA</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>{{totalCourses}}</td>
+                                                    <td>{{totalCredit}}</td>
+                                                    <td></td>
+                                                </tr>
+
+
+
+                                            </tbody>
+                                            </table>
+                                    </div>
+                                    <div>
+                                        <input type="button" name="confirmGrade"  value="Confirm Grade"  ng-click="ConfirmGrade()"/>
+                                        <input type="button" name="editGrade"  value="Edit Grade"  ng-click="EditGrade()"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                <input type="button" id="btnSave" class="form-control btn-space" value="Submit" ng-click="CreateEnrollment()" />
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Become A Instructor -->
+
+
+
+<!--<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Course List</title>
+
+    <style>
+
+        .tableData {
+            border-left: solid 1px #D8C3C3;
+            border-top: solid 1px #D8C3C3;
+        }
+
+
+
+            .tableData tr {
+            }
+
+
+
+            .tableData td, .tableData th {
+                border-right: solid 1px #D8C3C3;
+                border-bottom: solid 1px #D8C3C3;
+                text-align: left;
+                padding: 5px;
+            }
+
+
+
+            .tableData td {
+            }
+
+
+
+            .tableData th {
+                background-color: #FAFAFA;
+                padding: 7px 5px;
+                border-bottom-color: #9C9C9C;
+            }
+
+
+
+        .odd {
+            background-color: #f3f3f3;
+        }
+
+
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
+
+
+
+</head>
+
+<body ng-app="CourseApp">
+
+    <div ng-controller="CourseController" ng-init="CourseList()">
+
+        <table class="tableData">
+
+            <tr>
+
+                <th>Course Name</th>
+
+                <th>Date Created</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+            <tr ng-repeat="e in record" ng-class-even="'even'" ng-class-odd="'odd'">
+
+                <td>{{e.CourseName}}</td>
+
+                <td>{{e.DateCreated}}</td>-->
+@*<td><a href="/Home/update_data?id={{e.Sr_no}}">Update</a></td>
+
+    <td><a ng-click="deleterecord(e.Sr_no)">Delete</a></td>*@
+
+<!--</tr>
+
+        </table>
+
+    </div>
+
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/AngularCode/Controller/CourseController.js"></script>
+
+</body>
+
+</html>-->
