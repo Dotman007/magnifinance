@@ -15,6 +15,6 @@ namespace Magni.Core.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Birthday")]
         public DateTime Birthday { get; set; }
-        public decimal TeacherSalary { get; set; }
+        public decimal Salary { get; set; }
     }
 }
