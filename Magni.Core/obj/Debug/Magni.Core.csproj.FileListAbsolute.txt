@@ -1,0 +1,6 @@
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\bin\Debug\Magni.Core.dll
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\bin\Debug\Magni.Core.pdb
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.csproj.AssemblyReference.cache
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.csproj.CoreCompileInputs.cache
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.dll
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.pdb

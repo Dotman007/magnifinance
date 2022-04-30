@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Magni.Core.Models
 {
-    public class Teacher
+    public class Teacher:Audit
     {
         public string Name { get; set; }
 

@@ -10,7 +10,7 @@
     <RootNamespace>Magni.Core</RootNamespace>
     <AssemblyName>Magni.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-	 <LangVersion>preview</LangVersion>
+    <LangVersion>preview</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,7 +45,12 @@
   <ItemGroup>
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\University.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\IUniversity.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentGrading.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

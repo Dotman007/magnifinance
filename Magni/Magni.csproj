@@ -140,13 +140,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Controllers\GradeController.cs" />
-    <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\EnrollmentController.cs" />
-    <Compile Include="Controllers\StudentGradingController.cs" />
-    <Compile Include="Controllers\TeachersController.cs" />
-    <Compile Include="Controllers\SubjectsController.cs" />
-    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -437,12 +430,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Magni.Core\Magni.Core.csproj">
-      <Project>{00FF9A2D-E78C-49FD-AB50-F84C482A0C38}</Project>
-      <Name>Magni.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Magni.Core.Models
 {
-    public class Course: Audit, IUniversity
+    public class Course : Audit
     {
+        public string Name { get; set; }
+
+
     }
 }
