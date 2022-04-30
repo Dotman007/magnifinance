@@ -17,8 +17,8 @@ namespace Magni.Core.Models
         [Display(Name = "Birthday")]
         public DateTime Birthday { get; set; }
         public string? RegistrationNumber { get; set; }
-        public long CourseId { get; set; }
+        public long? CourseId { get; set; }
         [ForeignKey("CourseId")]
-        public Course? Course { get; set; }
+        public Course Course { get; set; }
     }
 }

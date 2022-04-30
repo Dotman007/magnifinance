@@ -12,16 +12,16 @@ namespace Magni.Core.Models
 
 
         [ForeignKey("StudentId")]
-        public Student? Student { get; set; }
-        public long StudentId { get; set; }
+        public Student Student { get; set; }
+        public long? StudentId { get; set; }
 
         [ForeignKey("SubjectId")]
-        public Subject? Subject { get; set; }
-        public long SubjectId { get; set; }
+        public Subject Subject { get; set; }
+        public long? SubjectId { get; set; }
 
 
         [ForeignKey("GradeId")]
-        public Grade? Grade { get; set; }
-        public long GradeId { get; set; }
+        public Grade Grade { get; set; }
+        public long? GradeId { get; set; }
     }
 }

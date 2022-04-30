@@ -12,3 +12,5 @@ C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repo
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repository.csproj.CopyComplete
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repository.dll
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repository.pdb
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repository.Migrations.first.resources
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Repository\obj\Debug\Magni.Repository.csproj.GenerateResource.cache

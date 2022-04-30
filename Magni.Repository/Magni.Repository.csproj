@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\MagniContext.cs" />
+    <Compile Include="Migrations\202204300739111_first.cs" />
+    <Compile Include="Migrations\202204300739111_first.designer.cs">
+      <DependentUpon>202204300739111_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +72,11 @@
       <Project>{A5B990C0-744C-4493-B16C-763FF643F432}</Project>
       <Name>Magni.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202204300739111_first.resx">
+      <DependentUpon>202204300739111_first.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

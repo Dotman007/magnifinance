@@ -14,13 +14,13 @@ namespace Magni.Core.Models
         public string Name { get; set; }
 
         [Required]
-        public long CourseId { get; set; }
+        public long? CourseId { get; set; }
 
         [ForeignKey("CourseId")]
-        public Course? Course { get; set; }
-        public long TeacherId { get; set; }
+        public Course Course { get; set; }
+        public long? TeacherId { get; set; }
 
         [ForeignKey("TeacherId")]
-        public Teacher? Teacher { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }
