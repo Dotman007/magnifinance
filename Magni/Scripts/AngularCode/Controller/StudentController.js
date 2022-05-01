@@ -8,6 +8,7 @@ app.controller("StudentController", function ($scope, $http) {
     $scope.student.birthday = $scope.Birthday;
     $scope.student.courseId = $scope.CourseId;
     $scope.record = [];
+    $scope.students = [];
     // Add Teacher
     console.log("Student: " + $scope.student);
     $scope.AddStudent = function () {
@@ -17,7 +18,7 @@ app.controller("StudentController", function ($scope, $http) {
         $http({
             method: 'POST',
 
-            url: '/Students/CreateStudent',
+            url: '/Student/CreateStudent',
 
             data: $scope.student
 
@@ -48,11 +49,27 @@ app.controller("StudentController", function ($scope, $http) {
     
 
 
-    $scope.CourseList = function () {
-        $http.get("/Courses/Courses").then(function (response) {
-
-            $scope.record = response.data;
+    $scope.AllCourses = function () {
+        $http.get("/Course/AllCourses").then(function (response) {
+            var resp = JSON.stringify(response.data);
+            var obj = JSON.parse(resp);
+            $scope.record = obj;
             console.log($scope.record);
+
+        }, function (error) {
+
+            alert('Failed');
+
+        });
+    }
+
+
+    $scope.AllStudents = function () {
+        $http.get("/Student/AllStudents").then(function (response) {
+            var resp = JSON.stringify(response.data);
+            var obj = JSON.parse(resp);
+            $scope.students = obj;
+            console.log($scope.students);
 
         }, function (error) {
 

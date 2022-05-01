@@ -1,0 +1,79 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div id="app">
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row" ng-init="GetStudentGradingList()" ng-app="StudentGradingApp" ng-controller="StudentGradingController">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4>
+                                Students Information
+                            </h4>
+                        </div>
+                        <div class="card-body ">
+                            <form action="#">
+                                <div>
+                                    <table class="table table-striped table-bordered v_center" id="table-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Teacher</th>
+                                                <th>Course</th>
+                                                <th>Subject</th>
+                                                <th>Total</th>
+                                                <th>Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="grader in studentGradingLists">
+                                            <tr >
+                                                <td>{{grader.TeacherName}}</td>
+                                                <td>{{grader.TeacherCourse}}</td>
+                                                <td>{{grader.SubjectName}}</td>
+                                                <td>{{grader.TotalStudents}}</td>
+                                                
+                                                <td>
+                                                    <div>
+                                                    
+                                                        <br />
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Student RegNo</th>
+                                                                    <th>Subject</th>
+                                                                    <th>Grade</th>
+                                                                    <th>Score</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="grad  in grader.StudentGradingInfoDtos">
+                                                                    <td>{{grad.StudentRegNo}}</td>
+                                                                    <td>{{grad.Subject}}</td>
+                                                                    <td>{{grad.Grade}}</td>
+                                                                    <td>{{grad.Score}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; CodiePie 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

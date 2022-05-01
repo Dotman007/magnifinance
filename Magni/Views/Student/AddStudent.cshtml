@@ -1,0 +1,98 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div id="app">
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row" ng-init="AllCourses();AllStudents()" ng-app="StudentApp" ng-controller="StudentController">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4>Add Student</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#">
+
+                                <div class="form-group">
+                                    <label for="email">Student Name</label>
+                                    <input id="studentName" type="text" class="form-control" ng-model="student.Name">
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+
+
+                               
+
+                                <div class="form-group">
+                                    <label for="email">Birthday</label>
+                                    <input id="birthday" type="date" class="form-control" ng-model="student.birthday">
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Course Name</label>
+
+                                    @*<select name="repeatSelect" id="repeatSelect" >
+                <option ng-repeat="option in teachers" ng-model="subj.teacherId" >{{option.teacherId}}</option>
+            </select>*@
+
+                                    <select ng-model="student.courseId">
+                                        <option ng-repeat="t in record">{{t.CourseId}} </option>
+                                    </select>
+                                    @*<input id="teacherName" type="text" class="form-control" ng-model="subject.TeacherName">*@
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Submit" ng-click="AddStudent()" />
+                                </div>
+
+                                <div class="form-group">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Student Name</th>
+                                                <th>Course</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="sub in students">
+                                            <tr>
+                                                <td>{{sub.Name}}</td>
+                                                <td>{{sub.CourseId}}</td>
+                                                @*<td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Delete" /></td>
+                        <td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Update" /></td>
+                        <td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Details" /></td>*@
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <div class="card" style="display:none">
+                                <div class="card-header">
+                                    <h4>Modal Center</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-2">You can change the modal position to center.</p>
+                                    <button class="btn btn-primary" id="modal-2">Launch Modal</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; CodiePie 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

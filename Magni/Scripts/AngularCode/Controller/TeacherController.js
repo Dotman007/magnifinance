@@ -7,11 +7,10 @@ app.controller("TeacherController", function ($scope, $http) {
     $scope.teacher.Name = $scope.Name;
     $scope.teacher.salary = $scope.Salary;
     $scope.teacher.birthday = $scope.Birthday;
-    $scope.teacher.courseId = $scope.CourseName;
     $scope.record = [];
     // Add Teacher
     console.log("CourseName: " + $scope.teacher);
-    $scope.AddTeacher = function () {
+    $scope.CreateTeacher = function () {
 
         $scope.btnSave = "Please Wait..";
 
@@ -19,7 +18,7 @@ app.controller("TeacherController", function ($scope, $http) {
 
             method: 'POST',
 
-            url: '/Teachers/CreateTeacher',
+            url: '/Teacher/CreateTeacher',
 
             data: $scope.teacher
 
@@ -32,9 +31,9 @@ app.controller("TeacherController", function ($scope, $http) {
             $scope.Alert();
 
            
-        }).error(function () {
+        }).catch(function (error) {
 
-            alert('Failed');
+            alert(error);
 
         });
 
@@ -54,6 +53,23 @@ app.controller("TeacherController", function ($scope, $http) {
         $http.get("/Courses/Courses").then(function (response) {
 
             $scope.record = response.data;
+            console.log($scope.record);
+
+        }, function (error) {
+
+            alert('Failed');
+
+        });
+    }
+
+
+
+    $scope.AllTeachers = function () {
+        $http.get("/Teacher/AllTeachers").then(function (response) {
+
+            var resp = JSON.stringify(response.data);
+            var obj = JSON.parse(resp);
+            $scope.record = obj
             console.log($scope.record);
 
         }, function (error) {

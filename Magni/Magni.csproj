@@ -52,13 +52,32 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -140,11 +159,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\StudentGradingController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\Broadcaster.cs" />
+    <Compile Include="Hubs\CourseHub.cs" />
+    <Compile Include="IBroadcaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CreateCourseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +211,160 @@
     <Content Include="Content\css\demo.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\dashboard\assets\bundles\lib.vendor.bundle.js" />
+    <Content Include="Content\dashboard\assets\css\components.min.css" />
+    <Content Include="Content\dashboard\assets\css\style.min.css" />
+    <Content Include="Content\dashboard\assets\img\americanexpress.png" />
+    <Content Include="Content\dashboard\assets\img\avatar\avatar-1.png" />
+    <Content Include="Content\dashboard\assets\img\avatar\avatar-2.png" />
+    <Content Include="Content\dashboard\assets\img\avatar\avatar-3.png" />
+    <Content Include="Content\dashboard\assets\img\avatar\avatar-4.png" />
+    <Content Include="Content\dashboard\assets\img\avatar\avatar-5.png" />
+    <Content Include="Content\dashboard\assets\img\browsers\chrome.png" />
+    <Content Include="Content\dashboard\assets\img\browsers\firefox.png" />
+    <Content Include="Content\dashboard\assets\img\browsers\internet-explorer.png" />
+    <Content Include="Content\dashboard\assets\img\browsers\opera.png" />
+    <Content Include="Content\dashboard\assets\img\browsers\safari.png" />
+    <Content Include="Content\dashboard\assets\img\dinersclub.png" />
+    <Content Include="Content\dashboard\assets\img\discover.png" />
+    <Content Include="Content\dashboard\assets\img\example-image-50.jpg" />
+    <Content Include="Content\dashboard\assets\img\example-image.jpg" />
+    <Content Include="Content\dashboard\assets\img\jcb.png" />
+    <Content Include="Content\dashboard\assets\img\mastercard.png" />
+    <Content Include="Content\dashboard\assets\img\news\img01.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img02.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img03.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img04.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img05.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img06.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img07.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img08.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img09.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img10.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img12.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img13.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img14.jpg" />
+    <Content Include="Content\dashboard\assets\img\news\img15.jpg" />
+    <Content Include="Content\dashboard\assets\img\paypal.png" />
+    <Content Include="Content\dashboard\assets\img\products\product-1-50.png" />
+    <Content Include="Content\dashboard\assets\img\products\product-2-50.png" />
+    <Content Include="Content\dashboard\assets\img\products\product-3-50.png" />
+    <Content Include="Content\dashboard\assets\img\products\product-4-50.png" />
+    <Content Include="Content\dashboard\assets\img\products\product-5-50.png" />
+    <Content Include="Content\dashboard\assets\img\spinner.gif" />
+    <Content Include="Content\dashboard\assets\img\visa.png" />
+    <Content Include="Content\dashboard\assets\js\page\features-setting-detail.html" />
+    <Content Include="Content\dashboard\assets\modules\apexcharts\apexcharts.min.js" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-colorpicker\dist\js\bootstrap-colorpicker.min.js" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-social\bootstrap-social.css" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-tagsinput\dist\bootstrap-tagsinput.css" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-tagsinput\dist\bootstrap-tagsinput.min.js" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-timepicker\css\bootstrap-timepicker.min.css" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap-timepicker\js\bootstrap-timepicker.min.js" />
+    <Content Include="Content\dashboard\assets\modules\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\dashboard\assets\modules\chart.min.js" />
+    <Content Include="Content\dashboard\assets\modules\charts-c3\c3.min.css" />
+    <Content Include="Content\dashboard\assets\modules\charts-c3\c3.min.js" />
+    <Content Include="Content\dashboard\assets\modules\charts-c3\d3.v3.min.js" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\css\chocolat.css" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\images\close.png" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\images\fullscreen.png" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\images\left.png" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\images\loader.gif" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\images\right.png" />
+    <Content Include="Content\dashboard\assets\modules\chocolat\dist\js\jquery.chocolat.min.js" />
+    <Content Include="Content\dashboard\assets\modules\cleave-js\dist\addons\cleave-phone.us.js" />
+    <Content Include="Content\dashboard\assets\modules\cleave-js\dist\cleave.min.js" />
+    <Content Include="Content\dashboard\assets\modules\codemirror\lib\codemirror.css" />
+    <Content Include="Content\dashboard\assets\modules\codemirror\lib\codemirror.js" />
+    <Content Include="Content\dashboard\assets\modules\codemirror\mode\javascript\javascript.js" />
+    <Content Include="Content\dashboard\assets\modules\codemirror\theme\duotone-dark.css" />
+    <Content Include="Content\dashboard\assets\modules\datatables\DataTables-1.10.16\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\dashboard\assets\modules\datatables\DataTables-1.10.16\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\dashboard\assets\modules\datatables\datatables.min.css" />
+    <Content Include="Content\dashboard\assets\modules\datatables\datatables.min.js" />
+    <Content Include="Content\dashboard\assets\modules\datatables\Select-1.2.4\css\select.bootstrap4.min.css" />
+    <Content Include="Content\dashboard\assets\modules\datatables\Select-1.2.4\js\dataTables.select.min.js" />
+    <Content Include="Content\dashboard\assets\modules\dropzonejs\dropzone.css" />
+    <Content Include="Content\dashboard\assets\modules\dropzonejs\min\dropzone.min.js" />
+    <Content Include="Content\dashboard\assets\modules\echart\echarts.min.js" />
+    <Content Include="Content\dashboard\assets\modules\flag-icon-css\css\flag-icon.min.css" />
+    <Content Include="Content\dashboard\assets\modules\fontawesome\css\all.min.css" />
+    <Content Include="Content\dashboard\assets\modules\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Content\dashboard\assets\modules\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Content\dashboard\assets\modules\gmaps.js" />
+    <Content Include="Content\dashboard\assets\modules\ionicons\css\ionicons.min.css" />
+    <Content Include="Content\dashboard\assets\modules\izitoast\css\iziToast.min.css" />
+    <Content Include="Content\dashboard\assets\modules\izitoast\js\iziToast.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jquery-pwstrength\jquery.pwstrength.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jquery-selectric\jquery.selectric.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jquery-selectric\selectric.css" />
+    <Content Include="Content\dashboard\assets\modules\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jquery.sparkline.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\jquery.vmap.min.js" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\jqvmap.min.css" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\maps\jquery.vmap.germany.js" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\maps\jquery.vmap.russia.js" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\maps\jquery.vmap.USA.html" />
+    <Content Include="Content\dashboard\assets\modules\jqvmap\dist\maps\jquery.vmap.world.js" />
+    <Content Include="Content\dashboard\assets\modules\knobjs\knob.min.js" />
+    <Content Include="Content\dashboard\assets\modules\owlcarousel2\dist\assets\owl.carousel.min.css" />
+    <Content Include="Content\dashboard\assets\modules\owlcarousel2\dist\assets\owl.theme.default.min.css" />
+    <Content Include="Content\dashboard\assets\modules\owlcarousel2\dist\assets\owl.video.play.png" />
+    <Content Include="Content\dashboard\assets\modules\owlcarousel2\dist\owl.carousel.min.js" />
+    <Content Include="Content\dashboard\assets\modules\prism\prism.css" />
+    <Content Include="Content\dashboard\assets\modules\prism\prism.js" />
+    <Content Include="Content\dashboard\assets\modules\select2\dist\css\select2.min.css" />
+    <Content Include="Content\dashboard\assets\modules\select2\dist\js\select2.full.min.js" />
+    <Content Include="Content\dashboard\assets\modules\simple-weather\jquery.simpleWeather.min.js" />
+    <Content Include="Content\dashboard\assets\modules\summernote\summernote-bs4.css" />
+    <Content Include="Content\dashboard\assets\modules\summernote\summernote-bs4.js" />
+    <Content Include="Content\dashboard\assets\modules\sweetalert\sweetalert.min.js" />
+    <Content Include="Content\dashboard\assets\modules\upload-preview\assets\js\jquery.uploadPreview.min.js" />
+    <Content Include="Content\dashboard\assets\modules\weather-icon\css\weather-icons-wind.min.css" />
+    <Content Include="Content\dashboard\assets\modules\weather-icon\css\weather-icons.min.css" />
+    <Content Include="Content\dashboard\asset\img\unsplash\andre-benz-1214056-unsplash.html" />
+    <Content Include="Content\dashboard\asset\img\unsplash\eberhard-grossgasteiger-1207565-unsplash.html" />
+    <Content Include="Content\dashboard\js\CodiePie.js" />
+    <Content Include="Content\dashboard\js\custom.js" />
+    <Content Include="Content\dashboard\js\page\auth-register.js" />
+    <Content Include="Content\dashboard\js\page\bootstrap-modal.js" />
+    <Content Include="Content\dashboard\js\page\components-chat-box.js" />
+    <Content Include="Content\dashboard\js\page\components-multiple-upload.js" />
+    <Content Include="Content\dashboard\js\page\components-statistic.js" />
+    <Content Include="Content\dashboard\js\page\components-table.js" />
+    <Content Include="Content\dashboard\js\page\components-user.js" />
+    <Content Include="Content\dashboard\js\page\features-post-create.js" />
+    <Content Include="Content\dashboard\js\page\features-posts.js" />
+    <Content Include="Content\dashboard\js\page\forms-advanced-forms.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-advanced-route.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-draggable-marker.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-geocoding.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-geolocation.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-marker.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-multiple-marker.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-route.js" />
+    <Content Include="Content\dashboard\js\page\gmaps-simple.js" />
+    <Content Include="Content\dashboard\js\page\index-0.js" />
+    <Content Include="Content\dashboard\js\page\index.js" />
+    <Content Include="Content\dashboard\js\page\modules-apex.js" />
+    <Content Include="Content\dashboard\js\page\modules-c3.js" />
+    <Content Include="Content\dashboard\js\page\modules-calendar.js" />
+    <Content Include="Content\dashboard\js\page\modules-chartjs.js" />
+    <Content Include="Content\dashboard\js\page\modules-datatables.js" />
+    <Content Include="Content\dashboard\js\page\modules-echart.js" />
+    <Content Include="Content\dashboard\js\page\modules-ion-icons.js" />
+    <Content Include="Content\dashboard\js\page\modules-knobjs.js" />
+    <Content Include="Content\dashboard\js\page\modules-slider.js" />
+    <Content Include="Content\dashboard\js\page\modules-sparkline.js" />
+    <Content Include="Content\dashboard\js\page\modules-sweetalert.js" />
+    <Content Include="Content\dashboard\js\page\modules-toastr.js" />
+    <Content Include="Content\dashboard\js\page\modules-vector-map.js" />
+    <Content Include="Content\dashboard\js\page\utilities-contact.js" />
+    <Content Include="Content\dashboard\js\scripts.js" />
     <Content Include="Content\demo\about.png" />
     <Content Include="Content\demo\blog.png" />
     <Content Include="Content\demo\blog_details.png" />
@@ -324,9 +507,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\AngularCode\Controller\GradeController.js" />
     <Content Include="Scripts\AngularCode\Controller\StudentController.js" />
     <Content Include="Scripts\AngularCode\Controller\EnrollmentController.js" />
     <Content Include="Scripts\AngularCode\Controller\SubjectController.js" />
@@ -359,12 +545,21 @@
     <Content Include="Content\fonts\revicons\revicons90c6.ttf" />
     <Content Include="Content\fonts\revicons\revicons90c6.woff" />
     <Content Include="Content\toaster.scss" />
+    <Content Include="Content\dashboard\assets\modules\summernote\font\summernote4c4d.eot" />
+    <Content Include="Content\dashboard\assets\modules\summernote\font\summernote4c4d.ttf" />
+    <Content Include="Content\dashboard\assets\modules\summernote\font\summernote4c4d.woff" />
+    <Content Include="Content\dashboard\assets\modules\summernote\font\summernoted41d.eot" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Factory\app.js" />
+    <Content Include="Scripts\Factory\SignalR-factory.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -386,27 +581,26 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Courses\About.cshtml" />
-    <Content Include="Views\Courses\Contact.cshtml" />
-    <Content Include="Views\Courses\Index.cshtml" />
-    <Content Include="Views\Courses\CourseList.cshtml" />
+    <Content Include="Views\Course\About.cshtml" />
+    <Content Include="Views\Course\Contact.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Course\CourseList.cshtml" />
     <Content Include="Views\Shared\_LayoutStudent.cshtml" />
-    <Content Include="Views\Courses\RegisterCourse.cshtml" />
-    <Content Include="Views\Teachers\About.cshtml" />
-    <Content Include="Views\Teachers\Contact.cshtml" />
-    <Content Include="Views\Teachers\CourseList.cshtml" />
-    <Content Include="Views\Teachers\Index.cshtml" />
-    <Content Include="Views\Teachers\AddTeacher.cshtml" />
-    <Content Include="Views\Students\About.cshtml" />
-    <Content Include="Views\Students\AddStudent.cshtml" />
-    <Content Include="Views\Students\Contact.cshtml" />
-    <Content Include="Views\Students\CourseList.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\Subjects\About.cshtml" />
-    <Content Include="Views\Subjects\AddSubject.cshtml" />
-    <Content Include="Views\Subjects\Contact.cshtml" />
-    <Content Include="Views\Subjects\CourseList.cshtml" />
-    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Course\RegisterCourse.cshtml" />
+    <Content Include="Views\Teacher\About.cshtml" />
+    <Content Include="Views\Teacher\Contact.cshtml" />
+    <Content Include="Views\Teacher\CourseList.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Student\About.cshtml" />
+    <Content Include="Views\Student\AddStudent.cshtml" />
+    <Content Include="Views\Student\Contact.cshtml" />
+    <Content Include="Views\Student\CourseList.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Subject\About.cshtml" />
+    <Content Include="Views\Subject\AddSubject.cshtml" />
+    <Content Include="Views\Subject\Contact.cshtml" />
+    <Content Include="Views\Subject\CourseList.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
     <Content Include="Views\Enrollment\About.cshtml" />
     <Content Include="Views\Enrollment\Enroll.cshtml" />
     <Content Include="Views\Enrollment\Contact.cshtml" />
@@ -415,8 +609,18 @@
     <Content Include="Views\StudentGrading\About.cshtml" />
     <Content Include="Views\StudentGrading\Contact.cshtml" />
     <Content Include="Views\StudentGrading\CourseList.cshtml" />
-    <Content Include="Views\StudentGrading\AddGrade.cshtml" />
+    <Content Include="Views\StudentGrading\AddStudentGrading.cshtml" />
     <Content Include="Views\StudentGrading\Index.cshtml" />
+    <Content Include="Views\Course\AddCourse.cshtml" />
+    <Content Include="Views\Teacher\AddTeacher.cshtml" />
+    <Content Include="Views\Grade\About.cshtml" />
+    <Content Include="Views\Grade\AddGrade.cshtml" />
+    <Content Include="Views\Grade\Contact.cshtml" />
+    <Content Include="Views\Grade\CourseList.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\StudentGrading\modal.html" />
+    <Content Include="Views\StudentGrading\SubjectInfo.cshtml" />
+    <Content Include="Views\StudentGrading\CourseInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -430,6 +634,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Magni.Core\Magni.Core.csproj">
+      <Project>{A5B990C0-744C-4493-B16C-763FF643F432}</Project>
+      <Name>Magni.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

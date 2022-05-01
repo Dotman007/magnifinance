@@ -9,6 +9,7 @@ namespace Magni.Core.Models
     public class Course : Audit
     {
         public string Name { get; set; }
+        public int Unit{ get; set; }
 
 
     }

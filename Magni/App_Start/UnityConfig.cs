@@ -1,5 +1,6 @@
 using Magni.Core.Interface;
 using Magni.Core.Services;
+using Magni.Hubs;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
@@ -18,9 +19,10 @@ namespace Magni
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<ICourse, CourseService>();
             container.RegisterType<ITeacher, TeacherService>();
+            container.RegisterType<IBroadcaster, Broadcaster>();
             container.RegisterType<IStudent, StudentService>();
             container.RegisterType<ISubject, SubjectService>();
-            container.RegisterType<IEnrollment, EnrollmentService>();
+            //container.RegisterType<IEnrollment, EnrollmentService>();
             container.RegisterType<IStudentGrading, StudentGradingService>();
             container.RegisterType<IGrade, GradeService>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

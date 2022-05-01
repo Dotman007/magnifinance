@@ -1,4 +1,4 @@
-var app = angular.module("StudentGradingApp", [])
+var app = angular.module("StudentGradingApp", ['ngAnimate'])
     
 app.controller("StudentGradingController", function ($scope, $http) {
 
@@ -6,6 +6,7 @@ app.controller("StudentGradingController", function ($scope, $http) {
     //    public int GradeId { get; set; }
     //    public int CourseId { get; set; }
     //    public int SubjectId { get; set; }
+    $scope.startSpin = true;
     $scope.courseList = [];
     $scope.unitList = [];
     $scope.gradeList=[];
@@ -24,13 +25,16 @@ app.controller("StudentGradingController", function ($scope, $http) {
     $scope.IsVisible = false;
     $scope.courseGrades = [];
     $scope.editable = false;
+    $scope.studentGradingList = [];
+    $scope.studentGradings = [];
+    $scope.studentGradingLists = [];
+
+    $scope.studentGradeAverage = [];
     
     $scope.grade.Name = $scope.Name;
     $scope.studentGrading.StudentId = $scope.StudentId;
     $scope.courseList = [];
-    //$scope.studentGrading.salary = $scope.Salary;
-    //$scope.studentGrading.birthday = $scope.Birthday;
-    //$scope.studentGrading.courseId = $scope.CourseName;
+   
     $scope.record = [];
     $scope.result = {};
     // Add Teacher
@@ -93,6 +97,7 @@ app.controller("StudentGradingController", function ($scope, $http) {
 
         });
     }
+
 
     $scope.getGrade = function () {
         alert("Hi +" + parseInt($scope.grade.Name) * $scope.totalCourses.length);
@@ -198,11 +203,42 @@ app.controller("StudentGradingController", function ($scope, $http) {
             console.log($scope.record);
 
         }, function (error) {
-
             alert('Failed');
-
         });
     }
 
+
+
+    $scope.GetStudentSubjectGrade = function () {
+        $http.get("/StudentGrading/GetStudentSubjectGrade").then(function (response) {
+            var json = JSON.stringify(response.data)
+            $scope.studentGradingList = JSON.parse(json);
+            console.log($scope.studentGradingList);
+        },function (error) {
+            alert('Failed');
+        });
+    }
+
+    $scope.GetStudentGradingList = function () {
+        $http.get("/StudentGrading/GetStudentGradingList").then(function (response) {
+            var json = JSON.stringify(response.data)
+            $scope.studentGradingLists = JSON.parse(json);
+            console.log($scope.studentGradingLists);
+        }, function (error) {
+            alert('Failed');
+        });
+    }
+
+
+    $scope.GetStudentCourseAverage = function () {
+        
+        $http.get("/StudentGrading/GetStudentCourseAverage").then(function (response) {
+            var json = JSON.stringify(response.data)
+            $scope.studentGradeAverage = JSON.parse(json);
+            console.log($scope.studentGradeAverage);
+        }, function (error) {
+            alert('Failed');
+        });
+    }
 
 });

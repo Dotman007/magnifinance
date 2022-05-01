@@ -52,6 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\MagniContext.cs" />
+    <Compile Include="Interface\ICourseRepository.cs" />
+    <Compile Include="Interface\IGenericRepository.cs" />
+    <Compile Include="Interface\IGradeRepository.cs" />
+    <Compile Include="Interface\IStudentGradeRepository.cs" />
+    <Compile Include="Interface\IStudentRepository.cs" />
+    <Compile Include="Interface\ISubjectRepository.cs" />
+    <Compile Include="Interface\ITeacherRepository.cs" />
+    <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Migrations\202204300739111_first.cs" />
     <Compile Include="Migrations\202204300739111_first.designer.cs">
       <DependentUpon>202204300739111_first.cs</DependentUpon>
@@ -64,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GenericRepository\" />
-    <Folder Include="Interface\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

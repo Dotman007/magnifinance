@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +14,8 @@
     <LangVersion>preview</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +35,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +73,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\MagniContext.cs" />
+    <Compile Include="Dto\CourseDto.cs" />
+    <Compile Include="Dto\CreateCourseDto.cs" />
+    <Compile Include="Dto\CreateGradeDto.cs" />
+    <Compile Include="Dto\CreateStudentDto.cs" />
+    <Compile Include="Dto\CreateStudentGradingDto.cs" />
+    <Compile Include="Dto\CreateTeacherDto.cs" />
+    <Compile Include="Dto\GradeDto.cs" />
+    <Compile Include="Dto\Response.cs" />
+    <Compile Include="Dto\SubjectDto.cs" />
+    <Compile Include="Dto\TeacherDto.cs" />
+    <Compile Include="Interface\ICourse.cs" />
+    <Compile Include="Interface\IGrade.cs" />
+    <Compile Include="Interface\IStudent.cs" />
+    <Compile Include="Interface\IStudentGrading.cs" />
+    <Compile Include="Interface\ISubject.cs" />
+    <Compile Include="Interface\ITeacher.cs" />
+    <Compile Include="Migrations\202204301049238_first.cs" />
+    <Compile Include="Migrations\202204301049238_first.designer.cs">
+      <DependentUpon>202204301049238_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205010806447_added unit.cs" />
+    <Compile Include="Migrations\202205010806447_added unit.designer.cs">
+      <DependentUpon>202205010806447_added unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205010814197_removed unit.cs" />
+    <Compile Include="Migrations\202205010814197_removed unit.designer.cs">
+      <DependentUpon>202205010814197_removed unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205010824308_removed.cs" />
+    <Compile Include="Migrations\202205010824308_removed.designer.cs">
+      <DependentUpon>202205010824308_removed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Grade.cs" />
@@ -52,6 +116,49 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CourseService.cs" />
+    <Compile Include="Services\GradeService.cs" />
+    <Compile Include="Services\StudentGradingService.cs" />
+    <Compile Include="Services\StudentService.cs" />
+    <Compile Include="Services\SubjectService.cs" />
+    <Compile Include="Services\TeacherService.cs" />
+    <Compile Include="Utility\FilterHelper.cs" />
+    <Compile Include="Utility\GradePoints.cs" />
+    <Compile Include="ViewModels\RecordStudentGradeVm.cs" />
+    <Compile Include="ViewModels\StudentGradeViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
+    <Compile Include="ViewModels\SubjectViewModel.cs" />
+    <Compile Include="ViewModels\TeacherViewModel.cs" />
+    <Compile Include="Views\CourseTeacherStudentAverageGrade.cs" />
+    <Compile Include="Views\RecordStudentGrade.cs" />
+    <Compile Include="Views\StudentSubjectGrade.cs" />
+    <Compile Include="Views\SubjectTeacherStudentGrade.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202204301049238_first.resx">
+      <DependentUpon>202204301049238_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205010806447_added unit.resx">
+      <DependentUpon>202205010806447_added unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205010814197_removed unit.resx">
+      <DependentUpon>202205010814197_removed unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205010824308_removed.resx">
+      <DependentUpon>202205010824308_removed.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

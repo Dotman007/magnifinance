@@ -2,41 +2,27 @@ var app = angular.module("SubjectApp", [])
     
 app.controller("SubjectController", function ($scope, $http) {
 
-    $scope.btnSave = "Save";
     $scope.subject = {};
     $scope.subject.Name = $scope.Name;
-    $scope.subject.code = $scope.Code;
-    $scope.subject.title = $scope.Title;
-    $scope.subject.unit = $scope.Unit;
-    $scope.subject.courseId = $scope.CourseId;
-    $scope.subject.teacherId = $scope.TeacherId;
+    $scope.subject.Unit = $scope.Unit;
+    $scope.subject.teacherId = $scope.teacherId;
+    $scope.subject.courseId = $scope.courseId;
+    $scope.courses = [];
     $scope.record = [];
+    $scope.teachers = [];
     // Add Subject
-    //console.log("CourseName: " + $scope.subject);
     $scope.AddSubject = function () {
-
-        $scope.btnSave = "Please Wait..";
-
         $http({
-
             method: 'POST',
-
-            url: '/Subjects/CreateSubject',
-
+            url: '/Subject/CreateSubject',
             data: $scope.subject
-
-        }).then(function (response){
-
-            $scope.btnSave = "Save";
-
+        }).then(function (response) {
+            console.log($scope.teacherId + " " + $scope.courseId + $scope.Name);
             $scope.subject = null;
-            //$scope.pop();
             $scope.Alert(response.responseMessage);
+        }).catch(function (error) {
 
-           
-        }).error(function () {
-
-            alert('Failed');
+            alert(error);
 
         });
 
@@ -49,21 +35,36 @@ app.controller("SubjectController", function ($scope, $http) {
     //$scope.pop = function () {
     //    toaster.pop('Course Registration', "Course Registration", "Course Added Successfully!!");
     //};
-    
 
 
-    $scope.CourseList = function () {
-        $http.get("/Courses/Courses").then(function (response) {
-
-            $scope.record = response.data;
-            console.log($scope.record);
-
+    $scope.AllCourses = function () {
+        $http.get("/Course/AllCourses").then(function (response) {
+            $scope.courses = response.data;
+            console.log($scope.courses);
         }, function (error) {
-
             alert('Failed');
-
         });
     }
 
+
+    $scope.AllSubjects = function () {
+        $http.get("/Subject/AllSubjects").then(function (response) {
+
+            $scope.record = response.data;
+            console.log($scope.record);
+        }, function (error) {
+            alert('Failed');
+        });
+    }
+
+
+    $scope.AllTeachers = function () {
+        $http.get("/Teacher/AllTeachers").then(function (response) {
+            $scope.teachers = response.data;
+            console.log($scope.teachers);
+        }, function (error) {
+            alert('Failed');
+        });
+    }
 
 });

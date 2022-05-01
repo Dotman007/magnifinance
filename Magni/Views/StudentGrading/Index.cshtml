@@ -1,98 +1,69 @@
 ﻿@{
 
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
 
-
-<!DOCTYPE html>
-
-
-
-<html>
-
-<head>
-
-    <meta name="viewport" content="width=device-width" />
-
-    <title>Index</title>
-
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-
-</head>
-<body>
-    <h2>Index</h2>
-    <div ng-app="CourseApp" ng-controller="CourseController">
-        @*<div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">*@
-        @*<p class="divHead">List of Employee</p>
-            <table cellpadding="12" class="table table-bordered table-hover">
-                <tr>
-                    <td>
-                        <b>ID</b>
-                    </td>
-                    <td>
-                        <b>Name</b>
-                    </td>
-                    <td>
-                        <b>City</b>
-                    </td>
-                    <td>
-                        <b>Age</b>
-                    </td>
-                    <td>
-                        <b>Actions</b>
-                    </td>
-                </tr>
-                <tr ng-repeat="Emp in employees">
-                    <td>
-                        {{Emp.Emp_Id}}
-                    </td>
-                    <td>
-                        {{Emp.Emp_Name}}
-                    </td>
-                    <td>
-                        {{Emp.Emp_City}}
-                    </td>
-                    <td>
-                        {{Emp.Emp_Age}}
-                    </td>
-                    <td>
-                        <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateEmp(Emp)" />
-                        <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmp(Emp)" />
-                    </td>
-                </tr>
-            </table>*@
-        <div class="form-horizontal" role="form">
-            <div class="container">
-                <div class="row">
-                    <h2>
-                        <span id="spn">Add New Course</span>
-                    </h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Name:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Name" ng-model="course.Name">
-                            </div>
+<div id="app">
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row" ng-init="GetStudentSubjectGrade()" ng-app="StudentGradingApp" ng-controller="StudentGradingController">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4>
+                                Students Grade
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#">
+                                <div class="form-group">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Student Name</th>
+                                                <th>Grade Information</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="grader in studentGradingList">
+                                            <tr >
+                                                <td><a ng-click="clickMe(grad)">{{grader.StudentName}}</a></td>
+                                                
+                                                <td>
+                                                    <div>
+                                                    
+                                                        <br />
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Subject</th>
+                                                                    <th>Grade</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="grad  in grader.StudentGradingInfoDtos">
+                                                                    <td>{{grad.Subject}}</td>
+                                                                    <td>{{grad.Grade}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <br />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4">
-                        <input type="button" id="btnSave" class="form-control btn-space" value="Submit" ng-click="AddCourse()" />
+                    <div class="simple-footer">
+                        Copyright &copy; CodiePie 2020
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="~/Scripts/angular.min.js"></script>
-
-    <script src="~/Scripts/AngularCode/Controller/CourseController.js"></script>
-</body>
-
-</html>
+    </section>
+</div>

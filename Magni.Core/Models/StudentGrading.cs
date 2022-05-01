@@ -23,5 +23,7 @@ namespace Magni.Core.Models
         [ForeignKey("GradeId")]
         public Grade Grade { get; set; }
         public long? GradeId { get; set; }
+        public long? Unit { get; set; }
+        public long? Point { get; set; }
     }
 }
