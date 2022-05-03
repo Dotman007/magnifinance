@@ -18,7 +18,7 @@ namespace Magni.Core.Services
         {
             try
             {
-                var student = _context.StudentGradings.Any(s => s.GradeId == studentGradingDto.GradeId && s.StudentId == studentGradingDto.StudentId && s.SubjectId == studentGradingDto.SubjectId);
+                var student = _context.StudentGradings.Any(s => s.StudentId == studentGradingDto.StudentId && s.SubjectId == studentGradingDto.SubjectId);
                 if (student)
                 {
                     return new Response
@@ -94,6 +94,19 @@ namespace Magni.Core.Services
                                             group by a.Id, a.Name
                                             order by a.Id
                                             ").ToList();
+
+
+            //var query =  (from c in _context.Courses
+            //              join sub in _context.Students on c.Id equals sub.CourseId
+            //              join s in _context.Subjects on c.Id  equals s.CourseId   
+            //              join t in _context.Teachers  on s.TeacherId equals t.Id
+            //              join  sg in _context.StudentGradings on sub.Id equals sg.StudentId
+            //              join g in _context.Grades on sg.GradeId equals g.Id
+            //              group new
+            //              {
+            //                  c.Id,
+            //                  c.Name
+            //              } by c.Id ).ToList();
 
             return res;
         }

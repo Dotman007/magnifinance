@@ -15,7 +15,7 @@ namespace Magni.Core.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Birthday")]
-        public DateTime Birthday { get; set; }
+        public string Birthday { get; set; }
         public string? RegistrationNumber { get; set; }
         public long? CourseId { get; set; }
         [ForeignKey("CourseId")]

@@ -16,8 +16,8 @@ namespace Magni.Core.Dto
 
     public class UpdateCourseDto
     {
-        [Required]
         public long CourseId { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 

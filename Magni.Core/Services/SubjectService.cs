@@ -23,6 +23,7 @@ namespace Magni.Core.Services
                 CourseId = g.CourseId,
                 Name = g.Name,
                 TeacherId = g.TeacherId,
+                Unit = g.Unit,
             }).ToListAsync(); 
         }
 
@@ -54,11 +55,11 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<Response> DeleteSubject(DeleteSubjectDto subjectDto)
+        public async Task<Response> DeleteSubject(long Id)
         {
             try
             {
-                var getSubject = _context.Subjects.Where(s => s.Id == subjectDto.SubjectId).FirstOrDefault();
+                var getSubject = _context.Subjects.Where(s => s.Id == Id).FirstOrDefault();
                 if (getSubject == null)
                 {
                     return new Response
@@ -84,14 +85,16 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<GetSubjectResponseDto> GetSubjectById(GetSubjectRequestDto subjectDto)
+        public async Task<GetSubjectResponseDto> GetSubjectById(long Id)
         {
-            var getSubject = await _context.Subjects.Where(z=>z.Id == subjectDto.SubjectId).Select(g=> new
+            var getSubject = await _context.Subjects.Where(z=>z.Id == Id).Select(g=> new
             GetSubjectResponseDto
             {
                 CourseId =  g.CourseId,
                 Name = g.Name,
                 TeacherId = g.TeacherId,
+                SubjectId = g.Id,
+                Unit =  g.Unit,
             }).FirstOrDefaultAsync();
             return getSubject;
         }
@@ -101,16 +104,12 @@ namespace Magni.Core.Services
             try
             {
                 var getSubject = _context.Subjects.FirstOrDefault(x => x.Id == subjectDto.SubjectId);
-                if (getSubject != null)
+                if (getSubject == null)
                 {
                     return new Response
                     {
                         ResponseMessage = "Subject not found"
                     };
-                }
-                if (!string.IsNullOrEmpty(subjectDto.Name))
-                {
-                    getSubject.Name = subjectDto.Name;
                 }
                 if (subjectDto.TeacherId != 0)
                 {
@@ -119,6 +118,10 @@ namespace Magni.Core.Services
                 if (subjectDto.CourseId != 0)
                 {
                     getSubject.CourseId = subjectDto.CourseId;
+                }
+                if (subjectDto.Unit != 0)
+                {
+                    getSubject.Unit = subjectDto.Unit.Value;
                 }
                 await _context.SaveChangesAsync();
                 return new Response

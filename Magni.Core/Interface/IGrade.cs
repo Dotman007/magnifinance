@@ -11,8 +11,8 @@ namespace Magni.Core.Interface
     {
         Task<Response> CreateGrade(CreateGradeDto courseDto);
         Task<Response> UpdateGrade(UpdateGradeDto courseDto);
-        Task<Response> DeleteGrade(DeleteGradeDto courseDto);
-        Task<GetGradeResponseDto> GetGradeId(GetGradeRequestDto subjectDto);
+        Task<Response> DeleteGrade(long Id);
+        Task<GetGradeResponseDto> GetGradeId(long Id);
         Task<List<GetGradeResponseDto>> GradeList();
     }
 }

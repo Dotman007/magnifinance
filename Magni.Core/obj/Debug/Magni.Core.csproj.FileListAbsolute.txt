@@ -28,3 +28,5 @@ C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.cspro
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.Migrations.addedunit.resources
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.Migrations.removedunit.resources
 C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.Migrations.removed.resources
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.Migrations.updateddate.resources
+C:\Users\ASalami3\source\repos\Magni\Magni\Magni.Core\obj\Debug\Magni.Core.Migrations.updateddates.resources

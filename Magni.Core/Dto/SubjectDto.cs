@@ -11,9 +11,10 @@ namespace Magni.Core.Dto
     {
         [Required]
         public long SubjectId { get; set; }
-        public string Name { get; set; }
+        //public string Name { get; set; }
         public long? CourseId { get; set; }
         public long? TeacherId { get; set; }
+        public int? Unit { get; set; }
     }
     public class CreateSubjectDto
     {
@@ -48,6 +49,7 @@ namespace Magni.Core.Dto
         public long? CourseId { get; set; }
 
         public long? TeacherId { get; set; }
+        public long? Unit { get; set; }
 
     }
 }

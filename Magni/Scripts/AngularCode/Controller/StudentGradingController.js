@@ -1,19 +1,32 @@
-var app = angular.module("StudentGradingApp", ['ngAnimate'])
+var app = angular.module("StudentGradingApp", ['angularUtils.directives.dirPagination', 'ngAnimate', 'toaster'])
     
-app.controller("StudentGradingController", function ($scope, $http) {
+app.controller("StudentGradingController", function ($scope, $http, toaster, $window) {
 
     //public int StudentId { get; set; }
     //    public int GradeId { get; set; }
     //    public int CourseId { get; set; }
     //    public int SubjectId { get; set; }
+    var studentId = 0;
+    var gradeId = 0;
+    var subjectId = 0;
+    $scope.studentz = [];
     $scope.startSpin = true;
     $scope.courseList = [];
     $scope.unitList = [];
-    $scope.gradeList=[];
+    $scope.gradeList = [];
+    $scope.student = {};
+    $scope.studentModel = {};
+    $scope.subject = {};
+    $scope.grade = {};
     $scope.btnSave = "Save";
     $scope.courseName = "";
     $scope.subjectName = "";
     $scope.selectedValue = "";
+    $scope.filteredList  = [];
+    $scope.currentPage = 1;
+    $scope.numPerPage = 10;
+    $scope.subjects = [];
+    $scope.maxSize = 5;
     $scope.unit = "";
     $scope.courseId = "";
     $scope.studentGrading = {};
@@ -28,7 +41,7 @@ app.controller("StudentGradingController", function ($scope, $http) {
     $scope.studentGradingList = [];
     $scope.studentGradings = [];
     $scope.studentGradingLists = [];
-
+    $scope.grades = [];
     $scope.studentGradeAverage = [];
     
     $scope.grade.Name = $scope.Name;
@@ -37,37 +50,74 @@ app.controller("StudentGradingController", function ($scope, $http) {
    
     $scope.record = [];
     $scope.result = {};
-    // Add Teacher
-    console.log("CourseName: " + $scope.teacher);
-    $scope.AddTeacher = function () {
+    $scope.courses = [];
+    
 
-        $scope.btnSave = "Please Wait..";
+    $scope.error = function (err) {
+        toaster.pop('error', "Error", err);
+    };
+    
 
+    $scope.AddStudentGrading = function () {
+        $scope.studentModel.StudentId = $scope.student;
+        $scope.studentModel.GradeId = $scope.grade;
+        $scope.studentModel.SubjectId = $scope.subject;
         $http({
-
             method: 'POST',
-
-            url: '/Teachers/CreateTeacher',
-
-            data: $scope.teacher
-
-        }).then(function (response){
-
-            $scope.btnSave = "Save";
-
-            $scope.course = null;
-            //$scope.pop();
-            $scope.Alert();
-
-           
-        }).error(function () {
-
-            alert('Failed');
-
+            url: '/StudentGrading/CreateStudentGrading',
+            data: $scope.studentModel
+        }).then(function (response) {
+            $scope.studentModel = null;
+            $scope.GetStudentGradingList();
+            $scope.success();
+            $window.location.reload();
+        }).catch(function (error) {
+            $scope.error(error)
         });
 
     };
 
+    $scope.AllStudents = function () {
+        $http.get("/Student/AllStudents").then(function (response) {
+            var resp = JSON.stringify(response.data);
+            var obj = JSON.parse(resp);
+            $scope.studentz = obj;
+            //$scope.student.Birthday = $scope.student.Birthday;
+            console.log($scope.studentz);
+
+        }, function (error) {
+
+            $scope.error(error);
+
+        });
+    }
+
+    
+
+    $scope.GetStudentId = function (stud) {
+        studentId = $scope.student;
+        var studentName = $.grep($scope.studentz, function (stud) {
+            return stud.StudentId == studentId;
+        })[0].Name;
+        $scope.student.StudentId = studentId;
+    }
+
+    $scope.GetSubjetId = function (subs) {
+        subjectId = $scope.subject;
+        var subjetName = $.grep($scope.subjects, function (subs) {
+            return subs.SubjectId == subjectId;
+        })[0].Name;
+        $scope.subject.SubjectId = subjectId;
+    }
+
+
+    $scope.GetGradeId = function (grad) {
+        gradeId = $scope.grade;
+        var gradeName = $.grep($scope.grades, function (grad) {
+            return grad.GradeId == gradeId;
+        })[0].Name;
+        $scope.grade.GradeId = gradeId;
+    }
 
     $scope.ShowHide = function () {
         $scope.IsVisible = true;
@@ -76,8 +126,25 @@ app.controller("StudentGradingController", function ($scope, $http) {
     $scope.Alert = function () {
         alert("Sucess");
     }
+    $scope.AllGrades = function () {
+        $http.get("/Grade/AllGrades").then(function (response) {
+            var resp = JSON.stringify(response.data);
+            var obj = JSON.parse(resp);
+            $scope.grades = obj;
+            console.log($scope.grades);
+        }, function (error) {
+            $scope.error(error);
+        });
+    }
 
-
+    $scope.AllSubjects = function () {
+        $http.get("/Subject/AllSubjects").then(function (response) {
+            $scope.subjects = response.data;
+            console.log($scope.subjects);
+        }, function (error) {
+            $scope.error(error);
+        });
+    }
 
     $scope.GetStudentCourse = function () {
         $http.get("/StudentGrading/GetCourseByStudent?studentId=" + $scope.studentGrading.StudentId).then(function (response) {
@@ -89,43 +156,29 @@ app.controller("StudentGradingController", function ($scope, $http) {
             //}
             $scope.courseName = $scope.result.CourseName;
             
-            console.log($scope.result);
-
+            
         }, function (error) {
 
-            alert('Failed');
+            $scope.error(error);
 
         });
     }
 
 
-    $scope.getGrade = function () {
-        alert("Hi +" + parseInt($scope.grade.Name) * $scope.totalCourses.length);
-        
-        //console.log()
-        //console.log("grade Point " + JSON.stringify($scope.grade.Name));
-    }
+   
     $scope.GetStudentSubject = function () {
         $http.get("/StudentGrading/GetStudentSubjects?studentId=" + $scope.studentGrading.StudentId).then(function (response) {
 
             $scope.record = response.data;
             $scope.totalCourses = response.data.length;
-            console.log("Data: " + JSON.stringify(response.data));
+            
             $scope.totalCredit = $scope.record.reduce((n, { Unit }) => n+ parseInt(Unit), 0);
             //$scope.totalPoint = $scope.record.reduce((b, {Point }) => b + Point, 0);
 
-
-            console.log("Grade:  "+$scope.grade.Name);
-            
-            console.log($scope.totalCourses);
-            console.log("Total Credit : " + $scope.totalCredit);
-            //console.log("Total Point : " + $scope.totalPoint);
-
-            console.log($scope.record);
-
         }, function (error) {
 
-            alert('Failed');
+            $scope.error(error);
+
 
         });
     }
@@ -141,21 +194,18 @@ app.controller("StudentGradingController", function ($scope, $http) {
 
 
     $scope.GradeList = function () {
-        $http.get("/StudentGrading/GradeList").then(function (response) {
+        $http.get("/StudentGrading/GetStudentGradingList").then(function (response) {
 
             $scope.gradeList = response.data;
-            console.log($scope.grade.Name);
-            console.log(response.data);
+            
         }, function (error) {
 
-            alert('Failed');
+            $scope.error(error);
+
 
         });
     }
 
-    $scope.DisplayGrades = function () {
-        console.log("Grades : "+$scope.grade.Name);
-    }
 
 
 
@@ -176,11 +226,33 @@ app.controller("StudentGradingController", function ($scope, $http) {
 
         }, function (error) {
 
-            alert('Failed');
+            $scope.error(error);
+
 
         });
     }
 
+
+    $scope.success = function () {
+        toaster.pop('success', "Success", "Course Created Successfully");
+
+    };
+
+
+    $scope.delete = function () {
+        toaster.pop('success', "Success", "Course Deleted Successfully");
+
+    };
+
+    $scope.update = function () {
+        toaster.pop('success', "Success", "Course Updated Successfully");
+
+    };
+
+
+    $scope.error = function (err) {
+        toaster.pop('error', "Error", err);
+    };
     //$scope.pop = function () {
     //    toaster.pop('Course Registration', "Course Registration", "Course Added Successfully!!");
     //};
@@ -203,7 +275,8 @@ app.controller("StudentGradingController", function ($scope, $http) {
             console.log($scope.record);
 
         }, function (error) {
-            alert('Failed');
+            $scope.error(error);
+
         });
     }
 
@@ -215,7 +288,8 @@ app.controller("StudentGradingController", function ($scope, $http) {
             $scope.studentGradingList = JSON.parse(json);
             console.log($scope.studentGradingList);
         },function (error) {
-            alert('Failed');
+            $scope.error(error);
+
         });
     }
 
@@ -225,7 +299,8 @@ app.controller("StudentGradingController", function ($scope, $http) {
             $scope.studentGradingLists = JSON.parse(json);
             console.log($scope.studentGradingLists);
         }, function (error) {
-            alert('Failed');
+            $scope.error(error);
+
         });
     }
 
@@ -237,8 +312,12 @@ app.controller("StudentGradingController", function ($scope, $http) {
             $scope.studentGradeAverage = JSON.parse(json);
             console.log($scope.studentGradeAverage);
         }, function (error) {
-            alert('Failed');
+            $scope.error(error);
         });
+    }
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;
+        $scope.reverse = !$scope.reverse;
     }
 
 });

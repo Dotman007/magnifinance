@@ -27,9 +27,9 @@ namespace Magni.Controllers
             return Json(createSubject, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetSubjectById(GetSubjectRequestDto subject)
+        public async Task<JsonResult> GetSubjectById(long Id)
         {
-            var getSubject = await _subject.GetSubjectById(subject);
+            var getSubject = await _subject.GetSubjectById(Id);
             return Json(getSubject, JsonRequestBehavior.AllowGet);
         }
 
@@ -43,6 +43,7 @@ namespace Magni.Controllers
         {
             return View();
         }
+        [HttpPost]
         public async Task<JsonResult> UpdateSubject(UpdateSubjectDto subject)
         {
             if (!ModelState.IsValid)
@@ -53,13 +54,13 @@ namespace Magni.Controllers
             return Json(updateSubject, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> DeleteSubject(DeleteSubjectDto subject)
+        public async Task<JsonResult> DeleteSubject(long Id)
         {
             if (!ModelState.IsValid)
             {
                 return Json(ModelState);
             }
-            var createSubject = await _subject.DeleteSubject(subject);
+            var createSubject = await _subject.DeleteSubject(Id);
             return Json(createSubject, JsonRequestBehavior.AllowGet);
         }
     }

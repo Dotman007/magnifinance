@@ -37,9 +37,9 @@ namespace Magni.Controllers
             return Json(createCourse, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetCourseId(GetCourseRequestDto subject)
+        public async Task<JsonResult> GetCourseId(long Id)
         {
-            var getSubject = await _course.GetCourseId(subject);
+            var getSubject = await _course.GetCourseId(Id);
             return Json(getSubject, JsonRequestBehavior.AllowGet);
         }
 
@@ -50,7 +50,8 @@ namespace Magni.Controllers
             return Json(getSubject, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> UpdateSubject(UpdateCourseDto courseDto)
+        [HttpPost]
+        public async Task<JsonResult> UpdateCourse(UpdateCourseDto courseDto)
         {
             if (!ModelState.IsValid)
             {
@@ -60,13 +61,13 @@ namespace Magni.Controllers
             return Json(updateCourse, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> DeleteCourse(DeleteCourseDto courseDto)
+        public async Task<JsonResult> DeleteCourse(long Id)
         {
             if (!ModelState.IsValid)
             {
                 return Json(ModelState);
             }
-            var deleteCourse = await _course.DeleteCourse(courseDto);
+            var deleteCourse = await _course.DeleteCourse(Id);
             return Json(deleteCourse, JsonRequestBehavior.AllowGet);
         }
     }

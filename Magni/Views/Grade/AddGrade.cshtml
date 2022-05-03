@@ -1,6 +1,7 @@
 ﻿@{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Grade";
 
 }
 
@@ -12,10 +13,12 @@
                 <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Add Student</h4>
+                            <h4>Add Grade</h4>
                         </div>
                         <div class="card-body">
-                            <form action="#">
+                            <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
+
+                            <form action="#" ng-hide="showDiv">
 
                                 <div class="form-group">
                                     <label for="email">Grade</label>
@@ -31,7 +34,7 @@
                                     </div>
                                 </div>
 
-                               
+
                                 <div class="form-group">
                                     <input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Submit" ng-click="CreateGrade()" />
                                 </div>
@@ -42,32 +45,48 @@
                                             <tr>
                                                 <th>Grade</th>
                                                 <th>Score</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody ng-repeat="sub in grades">
+                                        <tbody dir-paginate="sub in grades |itemsPerPage:5| filter:search |orderBy:sortKey:reverse">
                                             <tr>
                                                 <td>{{sub.Name}}</td>
                                                 <td>{{sub.Score}}</td>
-                                              
+                                                <td>
+                                                    <a href="#" ng-click="ShowHide();HideShow();GetGradeById(sub.GradeId)" class="edit" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit">&nbsp;</i></a>
+                                                    <a href="#" ng-click="DeleteGrade(sub.GradeId)" class="delete" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-remove">&nbsp;</i></a>
+                                                </td>
+
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <dir-pagination-controls class="pagination"></dir-pagination-controls>
                             </form>
-                            <div class="card" style="display:none">
-                                <div class="card-header">
-                                    <h4>Modal Center</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p class="mb-2">You can change the modal position to center.</p>
-                                    <button class="btn btn-primary" id="modal-2">Launch Modal</button>
-                                </div>
-                            </div>
+
                         </div>
 
-                    </div>
-                    <div class="simple-footer">
-                        Copyright &copy; CodiePie 2020
+                        <form action="#" ng-show="showModal">
+                            <div class="form-group">
+                                <label for="email">Grade</label>
+                                <input id="gradeName" type="text" class="form-control" ng-model="gradeDetail.Name">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Score</label>
+                                <input id="score" type="number" class="form-control" ng-model="gradeDetail.Score">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Submit" ng-click="UpdateGrade(gradeDetail.GradeId,gradeDetail.Name,gradeDetail.Score);Hide();" />
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>

@@ -51,11 +51,11 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<Response> DeleteGrade(DeleteGradeDto courseDto)
+        public async Task<Response> DeleteGrade(long Id)
         {
             try
             {
-                var getSubject = _context.Grades.Where(s => s.Id == courseDto.GradeId).FirstOrDefault();
+                var getSubject = _context.Grades.Where(s => s.Id == Id).FirstOrDefault();
                 if (getSubject == null)
                 {
                     return new Response
@@ -81,9 +81,9 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<GetGradeResponseDto> GetGradeId(GetGradeRequestDto subjectDto)
+        public async Task<GetGradeResponseDto> GetGradeId(long Id)
         {
-            var getSubject = await _context.Grades.Where(z => z.Id == subjectDto.GradeId).Select(g => new
+            var getSubject = await _context.Grades.Where(z => z.Id ==Id).Select(g => new
               GetGradeResponseDto
             {
                 Name = g.Name,
@@ -98,7 +98,7 @@ namespace Magni.Core.Services
             try
             {
                 var getSubject = _context.Grades.FirstOrDefault(x => x.Id == courseDto.GradeId);
-                if (getSubject != null)
+                if (getSubject == null)
                 {
                     return new Response
                     {
@@ -111,7 +111,7 @@ namespace Magni.Core.Services
                 }
                 if (courseDto.Score  > 0)
                 {
-                    courseDto.Score = courseDto.Score;
+                    getSubject.Score = courseDto.Score;
                 }
                 await _context.SaveChangesAsync();
                 return new Response

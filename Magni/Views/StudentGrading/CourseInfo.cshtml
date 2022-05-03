@@ -1,6 +1,7 @@
 ﻿@{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
+        
 
 }
 
@@ -18,17 +19,34 @@
                         </div>
                         <div class="card-body ">
                             <form action="#">
+
+                                <div class="search-element">
+                                    <input class="form-control" type="search" ng-model="search" placeholder="Search" aria-label="Search" data-height="10" data-width="250">
+                                </div>
                                 <div>
-                                    <table class="table table-striped table-bordered v_center" id="table-2">
+                                    <table class="table table-striped table-bordered v_center">
                                         <thead>
                                             <tr>
-                                                <th>Course Name</th>
-                                                <th>Teachers</th>
-                                                <th>Students</th>
-                                                <th>Average Grade</th>
+                                                <th ng-click="sort('Name')">
+                                                    Course Name
+                                                    <span class="glyphicon glyphicon-sort" ng-show="sortKey=='Name'" ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('TeacherCount')">
+                                                    Teachers
+                                                    <span class="glyphicon glyphicon-sort" ng-show="sortKey=='TeacherCount'" ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('StudentCount')">
+                                                    Students
+                                                    <span class="glyphicon glyphicon-sort" ng-show="sortKey=='StudentCount'" ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+                                                </th>
+                                                <th ng-click="sort('AvgGrade')">
+                                                    Average Grade
+                                                    <span class="glyphicon glyphicon-sort" ng-show="sortKey=='AvgGrade'" ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
                                             </tr>
                                         </thead>
-                                        <tbody ng-repeat="grader in studentGradeAverage">
+                                        <tbody dir-paginate="grader in studentGradeAverage |itemsPerPage:5| filter:search |orderBy:sortKey:reverse">
                                             <tr>
                                                 <td>{{grader.Name}}</td>
                                                 <td>{{grader.TeacherCount}}</td>
@@ -37,13 +55,18 @@
                                             </tr>
 
                                         </tbody>
+                                        @*<dir-pagination-controls
+                    max-size="5"
+                   direction-links="true"
+                   boundary-links="true">
+                </dir-pagination-controls>*@
                                     </table>
                                 </div>
+                                <dir-pagination-controls class="pagination"></dir-pagination-controls>
+
+
                             </form>
                         </div>
-                    </div>
-                    <div class="simple-footer">
-                        Copyright &copy; CodiePie 2020
                     </div>
                 </div>
             </div>

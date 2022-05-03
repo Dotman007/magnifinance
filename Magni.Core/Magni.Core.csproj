@@ -106,6 +106,14 @@
     <Compile Include="Migrations\202205010824308_removed.designer.cs">
       <DependentUpon>202205010824308_removed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205031336302_updated date.cs" />
+    <Compile Include="Migrations\202205031336302_updated date.designer.cs">
+      <DependentUpon>202205031336302_updated date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205031433056_updated dates.cs" />
+    <Compile Include="Migrations\202205031433056_updated dates.designer.cs">
+      <DependentUpon>202205031433056_updated dates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\Course.cs" />
@@ -150,6 +158,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205010824308_removed.resx">
       <DependentUpon>202205010824308_removed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205031336302_updated date.resx">
+      <DependentUpon>202205031336302_updated date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205031433056_updated dates.resx">
+      <DependentUpon>202205031433056_updated dates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

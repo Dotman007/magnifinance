@@ -5,13 +5,28 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register &mdash; CodiePie</title>
+    <title>@ViewBag.Title</title>
 
     <!-- General CSS Files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="~/Content/dashboard/assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/dashboard/assets/modules/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/css/toaster.css">
 
+    <link data-require="bootstrap-css@2.3.2"
+          data-semver="2.3.2"
+          rel="stylesheet"
+          href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/jqvmap/dist/jqvmap.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/datatables/datatables.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Content/dashboard/assets/modules/jquery-selectric/selectric.css">
 
     <!-- Template CSS -->
@@ -23,16 +38,99 @@
 
 <body class="layout-4">
 
+    <!-- Start main left sidebar menu -->
+    <!-- Start app top navbar -->
+    <nav class="navbar navbar-expand-lg main-navbar">
 
+
+    </nav>
+
+    <div class="main-sidebar sidebar-style-3">
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <a href="index-2.html">COURSE MGT</a>
+            </div>
+            <div class="sidebar-brand sidebar-brand-sm">
+                <a href="index-2.html">CMGT</a>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Subjects</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="../../Subject/AddSubject">Add Subject</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Courses</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="../../Course/AddCourse">Add Courses</a></li>
+                        <li><a class="nav-link" href="../..//StudentGrading/CourseInfo">Course Information</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Teachers</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="../../Teacher/AddTeacher">Add Teachers</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Students</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="../../Student/AddStudent">Add Students</a></li>
+                        <li><a class="nav-link" href="../../StudentGrading/AddStudentGrading">Grade Student</a></li>
+                        <li><a class="nav-link" href="../../StudentGrading/SubjectInfo">Subject Information</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Grades</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="../../Grade/AddGrade">Add Grades</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+    </div>
     <div>
         @RenderBody()
         <hr />
     </div>
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     @*<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>*@
     @*<script src="~/signalr/hubs"></script>*@
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/dirPagination.js"></script>
     <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/toaster.min.js"></script>
+    <script src="~/Scripts/toaster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.8.3/angular-touch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap.js"></script>
+
+    <script src="~/Content/dashboard/js/CodiePie.js"></script>
+    <script src="~/Content/dashboard/assets/bundles/lib.vendor.bundle.js"></script>
+    <script src="~/Content/dashboard/js/CodiePie.js"></script>
+
+
+    <script src="~/Content/dashboard/assets/modules/datatables/datatables.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="~/Content/dashboard/js/page/modules-datatables.js"></script>
+    <!-- JS Libraies -->
+    <script src="~/Content/dashboard/assets/modules/jquery.sparkline.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/chart.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+    <script src="~/Content/dashboard/assets/modules/summernote/summernote-bs4.js"></script>
+    <script src="~/Content/dashboard/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="~/Content/dashboard/js/page/index.js"></script>
+
+    <!-- Template JS File -->
+    <script src="~/Content/dashboard/js/scripts.js"></script>
+    <script src="~/Content/dashboard/js/custom.js"></script>
     <script src="~/Scripts/AngularCode/Controller/CourseController.js"></script>
     <script src="~/Scripts/AngularCode/Controller/SubjectController.js"></script>
     <script src="~/Scripts/AngularCode/Controller/TeacherController.js"></script>
@@ -40,16 +138,14 @@
     <script src="~/Scripts/AngularCode/Controller/StudentGradingController.js"></script>
     <script src="~/Scripts/AngularCode/Controller/GradeController.js"></script>
     @*<script src="~/Content/dashboard/assets/bundles/lib.vendor.bundle.js"></script>
-    <script src="~/Content/dashboard/js/CodiePie.js"></script>*@
+        <script src="~/Content/dashboard/js/CodiePie.js"></script>*@
 
 
     <!-- JS Libraies -->
     <!--<script src="~/Content/dashboard/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
     <script src="~/Content/dashboard/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
-
     <!-- Page Specific JS File -->
     <!--<script src="js/page/auth-register.js"></script>-->
-
     <!-- Template JS File -->
     @*<script src="~/Content/dashboard/js/scripts.js"></script>*@
     @*<script src="~/Content/dashboard/js/custom.js"></script>*@

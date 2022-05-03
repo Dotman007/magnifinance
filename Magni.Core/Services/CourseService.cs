@@ -52,11 +52,11 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<Response> DeleteCourse(DeleteCourseDto courseDto)
+        public async Task<Response> DeleteCourse(long Id)
         {
             try
             {
-                var getCourse = await _context.Courses.Where(s => s.Id == courseDto.CourseId).FirstOrDefaultAsync();
+                var getCourse = await _context.Courses.Where(s => s.Id == Id).FirstOrDefaultAsync();
                 if (getCourse == null)
                 {
                     return new Response
@@ -82,9 +82,9 @@ namespace Magni.Core.Services
 
         }
 
-        public async Task<GetCourseResponseDto> GetCourseId(GetCourseRequestDto courseDto)
+        public async Task<GetCourseResponseDto> GetCourseId(long Id)
         {
-            var  getCourse = await _context.Courses.Where(z => z.Id == courseDto.CourseId).Select(g => new
+            var  getCourse = await _context.Courses.Where(z => z.Id == Id).Select(g => new
               GetCourseResponseDto
             {
                 CourseId = g.Id,
@@ -99,7 +99,7 @@ namespace Magni.Core.Services
             try
             {
                 var getCourse = _context.Courses.FirstOrDefault(x => x.Id == courseDto.CourseId);
-                if (getCourse != null)
+                if (getCourse == null)
                 {
                     return new Response
                     {

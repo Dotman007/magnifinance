@@ -15,7 +15,7 @@ namespace Magni.Core.Services
         public readonly MagniContext _context = new MagniContext();
         public async Task<List<GetTeacherResponseDto>> AllTeachers()
         {
-            return await _context.Teachers.Select(s => new GetTeacherResponseDto
+            return await _context.Teachers.Where(x=>x.IsDeleted != true).Select(s => new GetTeacherResponseDto
             {
                 TeacherId =  s.Id,
                 Birthday = s.Birthday,
@@ -32,7 +32,7 @@ namespace Magni.Core.Services
                 _context.Teachers.Add(new Models.Teacher
                 {
                     Name = teacherDto.Name,
-                    Birthday = teacherDto.Birthday,
+                    Birthday = teacherDto.Birthday.ToString("yyyy-MM-dd"),
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     IsDeleted = false,
@@ -55,11 +55,11 @@ namespace Magni.Core.Services
             
         }
 
-        public async Task<Response> DeleteTeacher(DeleteTeacherDto teacherDto)
+        public async Task<Response> DeleteTeacher(long Id)
         {
             try
             {
-                var delete = _context.Teachers.FirstOrDefault(s => s.Id == teacherDto.TeacherId);
+                var delete = _context.Teachers.FirstOrDefault(s => s.Id == Id);
                 if (delete == null)
                 {
                     return new Response
@@ -85,14 +85,15 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<GetTeacherResponseDto> GetTeacherById(GetTeacherRequestDto subjectDto)
+        public async Task<GetTeacherResponseDto> GetTeacherById(long Id)
         {
-            var teacher =  _context.Teachers.Select(x => new GetTeacherResponseDto
+            var teacher =  _context.Teachers.Where(s => s.Id == Id).Select(x => new GetTeacherResponseDto
             {
+                TeacherId =  x.Id,
                 Birthday = x.Birthday,
                 Name = x.Name,
                 Salary = x.Salary
-            }).FirstOrDefault(s=>s.TeacherId == subjectDto.TeacherId);
+            }).FirstOrDefault();
 
             return teacher;
         }
@@ -102,7 +103,7 @@ namespace Magni.Core.Services
             try
             {
                 var getCourse = _context.Teachers.FirstOrDefault(x => x.Id == teacherDto.TeacherId);
-                if (getCourse != null)
+                if (getCourse == null)
                 {
                     return new Response
                     {
@@ -121,7 +122,7 @@ namespace Magni.Core.Services
 
                 if (teacherDto.Birthday != null)
                 {
-                    getCourse.Birthday = teacherDto.Birthday;
+                    getCourse.Birthday = teacherDto.Birthday.ToString("yyyy-MM-dd");
                 }
                 getCourse.DateModified = DateTime.Now;
                 getCourse.IsUpdated = true;

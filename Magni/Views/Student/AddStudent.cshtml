@@ -1,6 +1,7 @@
 ﻿@{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Student";
 
 }
 
@@ -14,7 +15,9 @@
                         <div class="card-header">
                             <h4>Add Student</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" ng-hide="showDiv">
+                            <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
+
                             <form action="#">
 
                                 <div class="form-group">
@@ -25,11 +28,11 @@
                                 </div>
 
 
-                               
+
 
                                 <div class="form-group">
                                     <label for="email">Birthday</label>
-                                    <input id="birthday" type="date" class="form-control" ng-model="student.birthday">
+                                    <input id="birthday" type="date" class="form-control" ng-model="student.Birthday">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -38,12 +41,16 @@
                                     <label for="email">Course Name</label>
 
                                     @*<select name="repeatSelect" id="repeatSelect" >
-                <option ng-repeat="option in teachers" ng-model="subj.teacherId" >{{option.teacherId}}</option>
-            </select>*@
+                    <option ng-repeat="option in teachers" ng-model="subj.teacherId" >{{option.teacherId}}</option>
+                </select>*@
 
-                                    <select ng-model="student.courseId">
-                                        <option ng-repeat="t in record">{{t.CourseId}} </option>
-                                    </select>
+                                    @*<select ng-model="student.CourseId">
+                    <option ng-repeat="t in record">{{t.CourseId}} </option>
+                </select>*@
+
+
+                                    <select ng-model="course" ng-options="cour.CourseId as cour.Name for cour in record track by stud.CourseId"
+                                            ng-change="GetCourseId()"> </select>
                                     @*<input id="teacherName" type="text" class="form-control" ng-model="subject.TeacherName">*@
                                     <div class="invalid-feedback">
                                     </div>
@@ -57,39 +64,68 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <div class="search-element">
+                                        <input class="form-control" type="search" ng-model="search" placeholder="Search" aria-label="Search" data-height="10" data-width="250">
+                                    </div>
                                     <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Student Name</th>
                                                 <th>Course</th>
+                                                <th>Birthday</th>
+                                                <th>Reg No</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody ng-repeat="sub in students">
+                                        <tbody dir-paginate="sub in students |itemsPerPage:5| filter:search |orderBy:sortKey:reverse">
                                             <tr>
                                                 <td>{{sub.Name}}</td>
                                                 <td>{{sub.CourseId}}</td>
-                                                @*<td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Delete" /></td>
-                        <td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Update" /></td>
-                        <td><input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Details" /></td>*@
+                                                <td>{{sub.Birthday}}</td>
+                                                <td>{{sub.RegistrationNumber}}</td>
+                                                <td>
+                                                    <a href="#" ng-click="ShowHide();HideShow();GetStudentById(sub.StudentId)" class="edit" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit">&nbsp;</i></a>
+                                                    <a href="#" ng-click="DeleteStudent(sub.StudentId)" class="delete" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-remove">&nbsp;</i></a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <dir-pagination-controls class="pagination"></dir-pagination-controls>
                             </form>
-                            <div class="card" style="display:none">
-                                <div class="card-header">
-                                    <h4>Modal Center</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p class="mb-2">You can change the modal position to center.</p>
-                                    <button class="btn btn-primary" id="modal-2">Launch Modal</button>
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
-                    <div class="simple-footer">
-                        Copyright &copy; CodiePie 2020
+                        <form action="#" ng-show="showModal">
+
+                            <div class="form-group">
+                                <label for="email">Student Name</label>
+                                <input id="studentName" type="text" readonly class="form-control" ng-model="studentDetail.Name">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label for="email">Birthday</label>
+                                <input id="birthday" type="date" class="form-control" ng-model="studentDetail.Birthday">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Course Name</label>
+                                <select ng-model="studentDetail.CourseId">
+                                    <option ng-repeat="t in record">{{t.CourseId}} </option>
+                                </select>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="button" ng-click="UpdateStudent(studentDetail.StudentId,studentDetail.Birthday,studentDetail.CourseId);Hide();" id="btnSave" class="form-control btn btn-lg btn-block" value="Submit" />
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

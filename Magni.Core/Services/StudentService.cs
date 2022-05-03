@@ -43,7 +43,7 @@ namespace Magni.Core.Services
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Name = subjectDto.Name,
-                    Birthday = subjectDto.Birthday,
+                    Birthday = subjectDto.Birthday.ToString("yyyy-MM-dd"),
                     RegistrationNumber = RandomString(10) 
                 });
                 await _context.SaveChangesAsync();
@@ -61,11 +61,11 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<Response> DeleteStudent(DeleteStudentDto subjectDto)
+        public async Task<Response> DeleteStudent(long Id)
         {
             try
             {
-                var getSubject = _context.Students.Where(s => s.Id == subjectDto.StudentId).FirstOrDefault();
+                var getSubject = _context.Students.Where(s => s.Id == Id).FirstOrDefault();
                 if (getSubject == null)
                 {
                     return new Response
@@ -91,9 +91,9 @@ namespace Magni.Core.Services
             }
         }
 
-        public async Task<GetStudentResponseDto> GetStudentById(GetStudentRequestDto subjectDto)
+        public async Task<GetStudentResponseDto> GetStudentById(long Id)
         {
-            var getSubject = await _context.Students.Where(z => z.Id == subjectDto.StudentId).Select(g => new
+            var getSubject = await _context.Students.Where(z => z.Id == Id).Select(g => new
                GetStudentResponseDto
             {
                 CourseId = g.CourseId,
@@ -110,7 +110,7 @@ namespace Magni.Core.Services
             try
             {
                 var getSubject = _context.Students.FirstOrDefault(x => x.Id == subjectDto.StudentId);
-                if (getSubject != null)
+                if (getSubject == null)
                 {
                     return new Response
                     {
@@ -123,7 +123,7 @@ namespace Magni.Core.Services
                 }
                 if (subjectDto.Birthday != null)
                 {
-                    getSubject.Birthday = subjectDto.Birthday;
+                    getSubject.Birthday = subjectDto.Birthday.ToString("yyyy-MM-dd");
                 }
                 if (subjectDto.CourseId != 0)
                 {

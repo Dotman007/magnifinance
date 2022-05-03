@@ -1,6 +1,7 @@
 ﻿@{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Result Information";
 
 }
 
@@ -8,7 +9,7 @@
 <div id="app">
     <section class="section">
         <div class="container mt-5">
-            <div class="row" ng-init="GetStudentGradingList()" ng-app="StudentGradingApp" ng-controller="StudentGradingController">
+            <div class="row" ng-init="GetStudentGradingList();AllStudents();AllGrades();AllSubjects();" ng-app="StudentGradingApp" ng-controller="StudentGradingController">
                 <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -18,59 +19,103 @@
                         </div>
                         <div class="card-body ">
                             <form action="#">
-                                <div>
-                                    <table class="table table-striped table-bordered v_center" id="table-2">
-                                        <thead>
-                                            <tr>
-                                                <th>Teacher</th>
-                                                <th>Course</th>
-                                                <th>Subject</th>
-                                                <th>Total</th>
-                                                <th>Result</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody ng-repeat="grader in studentGradingLists">
-                                            <tr >
-                                                <td>{{grader.TeacherName}}</td>
-                                                <td>{{grader.TeacherCourse}}</td>
-                                                <td>{{grader.SubjectName}}</td>
-                                                <td>{{grader.TotalStudents}}</td>
-                                                
-                                                <td>
-                                                    <div>
-                                                    
-                                                        <br />
-                                                        <table class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Student RegNo</th>
-                                                                    <th>Subject</th>
-                                                                    <th>Grade</th>
-                                                                    <th>Score</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="grad  in grader.StudentGradingInfoDtos">
-                                                                    <td>{{grad.StudentRegNo}}</td>
-                                                                    <td>{{grad.Subject}}</td>
-                                                                    <td>{{grad.Grade}}</td>
-                                                                    <td>{{grad.Score}}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <br />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
+
+                                <div class="form-group">
+                                    <label for="email">Student</label>
+                                    @*<select ng-model="student.studentId" ng-change="GetValue(s.Name)">
+                    <option ng-repeat="s in studentz" >{{s.Name}} </option>
+                </select>*@
+
+                                    <select ng-model="student" ng-options="stud.StudentId as stud.Name for stud in studentz track by stud.StudentId"
+                                            ng-change="GetStudentId()"> </select>
+                                    <div class="invalid-feedback">
+                                    </div>
                                 </div>
-                            </form>
+
+                                <div class="form-group">
+                                    <label for="email">Subject</label>
+                                    @*<select ng-model="subject.subjectId">
+                    <option ng-repeat="su in subjects">{{su.Name}} </option>
+                </select>*@
+                                    <select ng-model="subject" ng-options="subs.SubjectId as subs.Name for subs in subjects track by subs.SubjectId"
+                                            ng-change="GetSubjetId()"> </select>
+                                    <div class="invalid-feedback">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Grade</label>
+
+                                    <select ng-model="grade" ng-options="grad.GradeId as grad.Name for grad in grades track by grad.GradeId"
+                                            ng-change="GetGradeId()"> </select>
+                                    <div class="invalid-feedback">
+                                        @*<select ng-model="grade.gradeId">
+                        <option ng-repeat="g in grades">{{g.Name}}</option>
+                    </select>*@
+                                        <div class="invalid-feedback">
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                                <div class="form-group">
+                                    <input type="button" id="btnSave" class="form-control btn btn-primary btn-lg btn-block" value="Submit" ng-click="AddStudentGrading()" />
+                                </div>
+                                <div class="search-element">
+                                    <input class="form-control" type="search" ng-model="search" placeholder="Search" aria-label="Search" data-height="10" data-width="250">
+                                </div>
+                                <form action="#">
+                                    <div>
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Teacher</th>
+                                                    <th>Course</th>
+                                                    <th>Subject</th>
+                                                    <th>Total</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="grader in studentGradingLists |itemsPerPage:5| filter:search |orderBy:sortKey:reverse">
+                                                    <td>{{grader.TeacherName}}</td>
+                                                    <td>{{grader.TeacherCourse}}</td>
+                                                    <td>{{grader.SubjectName}}</td>
+                                                    <td>{{grader.TotalStudents}}</td>
+
+                                                    <td>
+                                                        <div>
+
+                                                            <br />
+                                                            <table class="table table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Reg No</th>
+                                                                        <th>Subject</th>
+                                                                        <th>Grade</th>
+                                                                        <th>Score</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="grad  in grader.StudentGradingInfoDtos">
+                                                                        <td>{{grad.StudentRegNo}}</td>
+                                                                        <td>{{grad.Subject}}</td>
+                                                                        <td>{{grad.Grade}}</td>
+                                                                        <td>{{grad.Score}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <br />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <dir-pagination-controls class="pagination"></dir-pagination-controls>
+                                </form>
                         </div>
-                    </div>
-                    <div class="simple-footer">
-                        Copyright &copy; CodiePie 2020
                     </div>
                 </div>
             </div>
