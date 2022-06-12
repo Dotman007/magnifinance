@@ -3,11 +3,18 @@ var app = angular.module("SubjectApp", ['angularUtils.directives.dirPagination',
 app.controller("SubjectController", function ($scope, $http, toaster, $window) {
 
     $scope.subject = {};
+    $scope.CourseId = 0;
+    $scope.TeacherId = 0;
+    $scope.teacherValue = {};
+    $scope.teacherValue.teacherId = $scope.teacherValue;
+    $scope.courseValue = {};
+    $scope.courseValue.courseId = $scope.courseValue;
     $scope.updateSubject = {};
     $scope.subject.Name = $scope.Name;
     $scope.subject.Unit = $scope.Unit;
-    $scope.subject.teacherId = $scope.teacherId;
-    $scope.subject.courseId = $scope.courseId;
+    //$scope.course.courseId = $scope.courseId;
+    $scope.subject.teacherId = $scope.TeacherId;
+    $scope.subject.courseId = $scope.CourseId;
     $scope.subjectDetails = {};
     $scope.subjectDetails.Name =  ""
     $scope.subjectDetails.Unit =  0
@@ -54,6 +61,8 @@ app.controller("SubjectController", function ($scope, $http, toaster, $window) {
 
     // Add Subject
     $scope.AddSubject = function () {
+        //$scope.subject.CourseId = $scope.CourseId;
+        //$scope.subject.TeacherId = $scope.TeacherId;
         $http({
             method: 'POST',
             url: '/Subject/CreateSubject',

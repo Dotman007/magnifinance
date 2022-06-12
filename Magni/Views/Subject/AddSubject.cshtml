@@ -39,12 +39,16 @@
                                     <label for="email">Teacher Name</label>
 
                                     @*<select name="repeatSelect" id="repeatSelect" >
-                    <option ng-repeat="option in teachers" ng-model="subj.teacherId" >{{option.teacherId}}</option>
-                </select>*@
-
-                                    <select ng-model="subject.teacherId">
-                                        <option ng-repeat="t in teachers">{{t.TeacherId}} </option>
+            <option ng-repeat="option in teachers" ng-model="subj.teacherId" >{{option.teacherId}}</option>
+        </select>*@
+                                    <select>
+                                        <option ng-model ="TeacherId" data-ng-repeat="t in teachers" value="{{t.TeacherId}}">{{t.Name}}</option>
                                     </select>
+                                    @*<select ng-model="TeacherId" ng-options="t.TeacherId as t.Name for t in teachers track by subject.TeacherId"
+        > </select>*@
+                                    @*<select ng-model="subject.teacherId">
+            <option ng-repeat="t in teachers">{{t.TeacherId}} </option>
+        </select>*@
                                     @*<input id="teacherName" type="text" class="form-control" ng-model="subject.TeacherName">*@
                                     <div class="invalid-feedback">
                                     </div>
@@ -52,9 +56,13 @@
 
                                 <div class="form-group">
                                     <label for="email">Course Name</label>
-                                    <select ng-model="subject.courseId">
-                                        <option ng-repeat="a in courses">{{a.CourseId}}</option>
+                                    <select>
+                                        <option ng-model="CourseId" data-ng-repeat="a in courses" value="{{a.CourseId}}">{{a.Name}}</option>
                                     </select>
+                                    @*<select ng-model="CourseId" ng-options="a.CourseId as a.Name for a in courses track by subject.CourseId"> </select>*@
+                                    @*<select ng-model="subject.courseId">
+            <option ng-repeat="a in courses">{{a.CourseId}}</option>
+        </select>*@
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
